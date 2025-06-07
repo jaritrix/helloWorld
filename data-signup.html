@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - Rock Paper Scissors</title>
-  <link rel="stylesheet" href="data-signup.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Rock Paper Scissors</title>
+    <link rel="stylesheet" href="data-signup.css">
 </head>
-
 <body>
-  <div class="container">
-    <div class="main-image">
-      <img src="src/cropped_img_roll.png" alt="top" />
-      <img src="src/dog-removebg-preview.png" alt="0" />
-      <img src="src/cropped_img_roll.png" alt="bottom" />
-    </div>
-    <form id="signupForm">
+    <div class="container">
+      <div class="main-image">
+        <img src="src/cropped_img_roll.png" alt="top" />
+        <img src="src/dog-removebg-preview.png" alt="0" />
+        <img src="src/cropped_img_roll.png" alt="bottom" />
+      </div>
+      <form id="signupForm">
+        <h2 id="form-title">Sign Up</h2>
+        <label for="signup-username">Username</label>
+        <input type="text" id="signup-username" placeholder="Choose a username" required />
+        <div class="error-message" id="username-error"></div>
 
-      <h2 id="form-title">Sign Up</h2>
+        <label for="signup-name">Name</label>
+        <input type="text" id="signup-name" placeholder="Enter your name" required />
+        <div class="error-message" id="name-error"></div>
 
-      <label for="signup-username">Username</label>
-      <input type="text" id="signup-username" placeholder="Choose a username" required />
-      <div class="error-message" id="username-error"></div>
+        <label for="signup-email">Email</label>
+        <input type="text" id="signup-email" placeholder="Enter your email" required />
+        <div class="error-message" id="email-error"></div>
 
-      <label for="signup-name">Name</label>
-      <input type="text" id="signup-name" placeholder="Enter your name" required />
-      <div class="error-message" id="name-error"></div>
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" placeholder="Create a password" required />
+        <div class="error-message" id="password-error"></div>
 
-      <label for="signup-email">Email</label>
-      <input type="email" id="signup-email" placeholder="Enter your email" required />
-      <div class="error-message" id="email-error"></div>
-
-      <label for="signup-password">Password</label>
-      <input type="password" id="signup-password" placeholder="Create a password" required />
-      <div class="error-message" id="password-error"></div>
-
-      <div id="signupBtn">
         <button type="submit">Sign Up</button>
-      </div>
-
-      <div class="form-footer">Already have an account?
-        <a href="index.html" id="show-login">Login</a>
-      </div>
-    </form>
-  </div>
-  <div class="popup" id="popup">
-    <div class="popup-box">
-      <p>Sign up successful!</p>
-      <button id="popup-continue" type="button">Continue</button>
+        <div class="form-footer">
+          Already have an account?
+          <a href="index.html" id="show-login">Login</a>
+        </div>
+      </form>
     </div>
-  </div>
-  <div id="balloon-container"></div>
-</body>
-<script src="data-signup.js"></script>
 
+    <div id="popup-overlay" style="display:flex;">
+      <div id="popup-box">
+        <span id="close-popup">&times;</span>
+        <div id="congrats-message">
+          <h2>Welcome to the Rock Paper Scissors game!</h2>
+          <img src="src/done.png" alt="done" />
+          <p>You have successfully signed up!</p>
+          <button id="continue-button" type="button">Continue</button>
+        </div>
+        <div id="balloon-container"></div>
+      </div>
+    </div>
+    <script src="data-signup.js"></script>
+</body>
 </html>
