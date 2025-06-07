@@ -1,0 +1,414 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Another Danger Slanted";
+  src: url(fonts_file_rrt/Another\ Danger\ Slanted\ -\ Demo.otf)
+    format("opentype");
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120deg, #1a1a1aa4 0%, #8e9e9a 100%);
+  background-color: lightyellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Arial", "Another Danger Slanted", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Main image styling */
+.main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.main-image img {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 0;
+}
+
+.main-image img[alt="top"] {
+  top: -40px;
+  left: -36%;
+  width: 170%;
+  height: 70px;
+  z-index: 10;
+  position: absolute;
+}
+
+.main-image img[alt="bottom"] {
+  bottom: -48px;
+  left: -36%;
+  width: 170%;
+  height: 70px;
+  z-index: 10;
+  position: absolute;
+}
+
+.main-image img[alt="0"] {
+  top: -160px;
+  left: 13%;
+  width: 67%;
+  z-index: 20;
+  position: absolute;
+}
+
+/* Container and form */
+.container {
+  background: linear-gradient(120deg, #1a1a1a 0%, #7d2cff 100%);
+  box-shadow: 0 0 32px blue;
+  padding: 32px 18px 22px 18px;
+  width: 350px;
+  max-width: 92vw;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 110px;
+  margin-left: -12px;
+  min-height: 320px;
+}
+
+h2 {
+  color: #fff;
+  font-size: 2.1rem;
+  letter-spacing: 9px;
+  text-align: center;
+  margin-bottom: 18px;
+  font-family: "Another Danger Slanted", Arial, sans-serif;
+}
+
+form {
+  width: 100%;
+}
+
+label {
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 1.05rem;
+  line-height: 25px;
+  margin-bottom: 2px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #7d2cff;
+  background: #23243a;
+  color: #fff;
+  font-size: 1.08rem;
+  outline: none;
+  transition: border 0.2s;
+  font-family: "Arial", sans-serif;
+  letter-spacing: 3px;
+  word-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+input:focus {
+  border: 1.5px solid #39ff14;
+}
+
+#signupBtn {
+  /* background-color: red; */
+  height: 35px;
+  width: 100%;
+  letter-spacing: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#signupBtn button {
+  width: 100%;
+  height: 42px;
+  background: linear-gradient(90deg, #7d2cff 0%, #39ff14 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  font-size: 1.15rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.2s;
+  font-family: "Another Danger Slanted", Arial, sans-serif;
+  letter-spacing: 10px;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px #7d2cff22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 14px #7d2cff88;
+}
+
+.form-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 1.08rem;
+  color: #ccc;
+  font-family: "Times New Roman", Times, serif, sans-serif;
+}
+
+a {
+  color: #37ff14c4;
+  margin-left: 4px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-family: "Times New Roman", Arial, sans-serif;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+/* Error and success messages */
+.error-message {
+  min-height: 10px;
+  color: #ff3b3b;
+  font-size: 0.97em;
+  line-height: 1.1;
+  margin-bottom: 2px;
+  margin-top: -4px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  transition: min-height 0.2s;
+}
+
+.success-message {
+  color: #39ff14;
+  background: #23243a;
+  border-radius: 8px;
+  padding: 10px 0;
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.data {
+  position: fixed;
+  width: 70%;
+  height: 70vh;
+  display: grid;
+  z-index: 9999;
+  margin: 20px 25px;
+  gap: 20px;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+  background-color: white;
+}
+
+.openPopup {
+  top: 50%;
+  position: absolute;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Popup overlay: background blur and center */
+#popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 30, 30, 0.65);
+  display: none; /* default: hidden */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: background 0.3s;
+}
+
+/* Show popup (add this class from JS when needed) */
+#popup.open {
+  display: flex;
+}
+
+/* Popup box styling */
+#popup-box {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px #0008;
+  padding: 40px 32px 32px 32px;
+  min-width: 340px;
+  max-width: 95vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popup-in 0.4s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+@keyframes popup-in {
+  from {
+    transform: scale(0.7) translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Close button */
+#close-popup {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 2.2rem;
+  color: #ff3b3b;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 2;
+  transition: color 0.2s;
+}
+#close-popup:hover {
+  color: #7d2cff;
+}
+
+/* Popup content tweaks */
+#top-text text {
+  font-size: 1.6rem;
+  color: #26d369;
+  background: none;
+  padding: 0;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+  display: block;
+  text-align: center;
+}
+
+#center-img img {
+  height: 120px;
+  width: auto;
+  margin: 12px 0;
+}
+
+#paira {
+  font-size: 1.2rem;
+  color: #333;
+  background: none;
+  letter-spacing: 2px;
+  margin: 12px 0 18px 0;
+  text-align: center;
+}
+
+#ContinueBtn {
+  background: none;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+#ContinueBtn button {
+  padding: 14px 36px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #7d2cff 0%, #39ff14 100%);
+  color: #fff;
+  border: none;
+  font-family: "Another Danger Slanted", Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7d2cff22;
+  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 4px;
+  margin-top: 0;
+  animation: Btn-jump 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+}
+.container {
+  max-width: 350px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px #0002;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 2px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: #7d2cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  margin-top: 12px;
+  cursor: pointer;
+}
+.error-message {
+  color: #ff3b3b;
+  font-size: 0.95em;
+  min-height: 18px;
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 30, 30, 0.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.popup.open {
+  display: flex;
+}
+.popup-box {
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px #0008;
+  text-align: center;
+}
+#popup-continue {
+  margin-top: 18px;
+  padding: 10px 32px;
+  background: #26d369;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Sign Up</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <div class="container">
+  <div class="main-image">
+    <img src="src/cropped_img_roll.png" alt="top" />
+    <img src="src/dog-removebg-preview.png" alt="0" />
+    <img src="src/cropped_img_roll.png" alt="bottom" />
+  </div>
+    <h2 id="form-title">Login</h2>
+    <form id="loginForm">
+      <label for="login-email">Email / Username</label>
+      <input type="text" id="login-email" placeholder="Enter your email / Username" required />
+      <div class="error-message" id="login-error"></div>
+
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" placeholder="Enter your password" required />
+      <div class="error-message" id="password-error"></div>
+
+      <button type="submit">Login</button>
+
+      <div class="form-footer">
+        Forgot your password?
+        <a href="forgate_passward.html" id="forgot-password">Reset Password</a>
+        <div class="form-footer">
+          Don't have an account?
+          <a href="data-signup.html" id="show-signup">Sign Up</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+  <script src="index.js"></script>
+</html>

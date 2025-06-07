@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="data-page.css" />
+</head>
+
+<body>
+  <div class="header" id="headerSection">
+    <div class="logo"><img src="src/logo.png" alt="Logo" /></div>
+    <a href="#Home" id="Home">Home</a>
+    <a href="#resetBtn" id="resetBtn">reset</a>
+    <a href="#gameRuleSection" id="gameRule">Game Rules</a>
+    <a href="#contactSection" id="contactLink">Contact Us</a>
+  </div>
+  <div class="container" id="Container">
+      <div class="right_tree"><img src="src/right_side_tree.svg" alt="right">
+      <div class="apple"><img src="src/apple_image.svg" alt="apple"></div>
+    </div>
+    <div class="text_one">
+      <marquee behavior="alternate" onmouseover="this.stop();" onmouseout="this.start();">Rock Paper Scissor Game
+      </marquee>
+    </div>
+    <div class="text_two">A Futuristic Gaming Experience</div>
+    <div class="left_tree"><img src="src/left_side_tree.svg" alt="left"></div>
+    <div class="image">
+      <div class="rock_image"><img src="src/rock.png" alt="rock"></div>
+      <div class="paper_image"><img src="src/paper.png" alt="paper"></div>
+      <div class="sessior_image"><img src="src/scissor.png" alt="sessior"></div>
+    </div>
+    <div class="text" id="Text">
+      <div class="rock_text"> <a>rock</a></div>
+      <div class="paper_text"><a>paper</a></div>
+      <div class="sessior_text"><a>sessior</a></div>
+    </div>
+  </div>
+  </div>
+  
+  </div>
+  <div class="hero-buttons">
+    <button class="game-btn" id="playNowBtn">Play Now</button>
+    <div class="score-row">
+      <h1>My Score: <span id="myScore">0</span></h1>
+      <h1>Computer Score: <span id="computerScore">0</span></h1>
+    </div>
+  </div>
+  <div class="game-rule" id="gameRuleSection">
+    <img src="src/fire_image.svg" alt="fire_image" />
+    <h1>Game Rules</h1>
+    <p class="description">
+      <br />&nbsp; Rock Paper Scissors is a
+      simple game in which two players simultaneously choose one option from
+      rock, paper, or scissors.The game is played in rounds, and the first player to win a
+      predetermined number of rounds is declared the overall winner. Players can choose their options in any order, and
+      the game is typically played in a best-of-three or best-of-five format.The game is often used as a simple decision-making tool
+      or as a
+      fun way to settle disputes. It is also a popular game in many cultures and is often played
+      in informal settings, such as among friends or family members. <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;🔴There are three options: <br />
+      ⛰ Rock<br />
+      📜Paper <br />✂ Scissors
+      <br />&nbsp;&nbsp;&nbsp;&nbsp;🔴The winner is determined by the following rules: <br />
+      ⚪ Rock beats Scissors <br />
+      ⚪ Scissors beats Paper<br />
+      ⚪ Paper beats Rock<br />
+      ⚪ If both choose the same option, the game is a draw.<br />
+    </p>
+  </div>
+  <div id="resultPopup" class="result-popup"></div>
+  <div class="contact-section" id="contactSection">
+    <h1>Contact Us</h1>
+    <p>Have feedback or want to reach out? We'd love to hear from you!</p>
+    <div class="reviews">
+      <div class="review">
+        <p class="review-text">"Great game! Super fun and easy to play."</p>
+        <span class="review-author">- Sonam Singh</span>
+      </div>
+      <div class="review">
+        <p class="review-text">"Loved the animations and smooth experience."</p>
+        <span class="review-author">- Rahul Verma</span>
+      </div>
+      <div class="review">
+        <p class="review-text">"Perfect for quick fun with friends!"</p>
+        <span class="review-author">- Sneha Gupta</span>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="main-data.js" defer></script>
+
+</html>
