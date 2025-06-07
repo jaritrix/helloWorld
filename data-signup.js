@@ -63,22 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
             hasError = true;
         }
 
-        // Get users from localStorage or empty array
-        let users = JSON.parse(localStorage.getItem('users') || '[]');
-
-        // Username exists check
-        const usernameExists = users.some(user => user.username === username);
-        if (usernameExists) {
-            usernameError.textContent = 'Username already exists!';
-            hasError = true;
-        }
-
-        // Email exists check
-        const emailExists = users.some(user => user.email === email);
-        if (emailExists) {
-            emailError.textContent = 'Email already exists!';
-            hasError = true;
-        }
+        // --- Remove localStorage user check (user.json logic) ---
+        // Username/email exists check ab backend karega
 
         if (hasError) return; // Agar koi error hai to popup nahi dikhana
 
@@ -99,6 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 // Agar koi aur message aaye to popup mat dikhana
                 // Error message show kar sakte hain
+                if (data.message && data.message.includes('exists')) {
+                    emailError.textContent = data.message;
+                }
             }
         })
         .catch(err => {
