@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let myScore = 0;
 let computerScore = 0;
 let gameActive = false;
+let roundCount = 0;
+const maxRounds = 5;
 
 const playNowBtn = document.getElementById('playNowBtn');
 const myScoreSpan = document.getElementById('myScore');
@@ -34,6 +36,7 @@ const heroImages = document.querySelectorAll('.image img');
 const resultPopup = document.getElementById('resultPopup');
 const myScoreH1 = myScoreSpan.closest('h1');
 const computerScoreH1 = computerScoreSpan.closest('h1');
+const resetBtn = document.getElementById('resetBtn');
 
 function showPopup(message, type) {
   resultPopup.textContent = message;
@@ -47,6 +50,44 @@ function showPopup(message, type) {
     }, 300);
   }, 1200);
 }
+
+function startAnimation() {
+  heroImages.forEach(img => img.classList.add('animated'));
+}
+function stopAnimation() {
+  heroImages.forEach(img => img.classList.remove('animated'));
+}
+
+function enableGame() {
+  gameActive = true;
+  roundCount = 0;
+  choiceLinks.forEach(link => {
+    link.style.pointerEvents = 'auto';
+    link.style.opacity = '1';
+  });
+  heroImages.forEach(img => {
+    img.style.pointerEvents = 'auto';
+    img.style.opacity = '1';
+  });
+  startAnimation();
+  playNowBtn.style.display = 'none'; // Hide Play Now button
+}
+
+function disableGame() {
+  gameActive = false;
+  choiceLinks.forEach(link => {
+    link.style.pointerEvents = 'none';
+    link.style.opacity = '0.5';
+  });
+  heroImages.forEach(img => {
+    img.style.pointerEvents = 'none';
+    img.style.opacity = '0.5';
+  });
+  stopAnimation();
+  playNowBtn.style.display = 'inline-block'; // Show Play Now button again
+}
+
+playNowBtn.addEventListener('click', enableGame);
 
 heroImages.forEach((img, idx) => {
   img.style.cursor = 'pointer';
@@ -83,72 +124,25 @@ heroImages.forEach((img, idx) => {
       setTimeout(() => computerScoreH1.classList.remove('score-animate-right'), 600);
     }
 
-    // Disable choices until Play Now is clicked again
-    gameActive = false;
-    choiceLinks.forEach(link => {
-      link.style.pointerEvents = 'none';
-      link.style.opacity = '0.5';
-    });
+    roundCount++;
+    if (roundCount >= maxRounds) {
+      disableGame();
+      showPopup("Game Over! Play Again?", "");
+    }
   });
 });
 
 // Initially disable choices
-choiceLinks.forEach(link => {
-  link.style.pointerEvents = 'none';
-  link.style.opacity = '0.5';
-});
-
-// Helper: Animation start
-function startAnimation() {
-  heroImages.forEach(img => img.classList.add('animated'));
-}
-
-// Helper: Animation stop
-function stopAnimation() {
-  heroImages.forEach(img => img.classList.remove('animated'));
-}
-
-// Play Now button logic
-playNowBtn.addEventListener('click', function() {
-  gameActive = true;
-  choiceLinks.forEach(link => {
-    link.style.pointerEvents = 'auto';
-    link.style.opacity = '1';
-  });
-  // Images enable bhi karein
-  heroImages.forEach(img => {
-    img.style.pointerEvents = 'auto';
-    img.style.opacity = '1';
-  });
-  startAnimation(); // Animation start
-});
+enableGame();
 
 // Reset button logic
-const resetBtn = document.getElementById('resetBtn');
 resetBtn.addEventListener('click', function (e) {
-  e.preventDefault(); // Page reload nahi hoga
-
-  // Score reset
+  e.preventDefault();
   myScore = 0;
   computerScore = 0;
   myScoreSpan.textContent = myScore;
   computerScoreSpan.textContent = computerScore;
-
-  // Choices disable
-  gameActive = false;
-  choiceLinks.forEach(link => {
-    link.style.pointerEvents = 'none';
-    link.style.opacity = '0.5';
-  });
-  // Images disable
-  heroImages.forEach(img => {
-    img.style.pointerEvents = 'none';
-    img.style.opacity = '0.5';
-  });
-
-  // Animation stop
-  stopAnimation();
-
-  // Popup hide
+  disableGame();
   resultPopup.style.display = 'none';
+  playNowBtn.style.display = 'inline-block';
 });
