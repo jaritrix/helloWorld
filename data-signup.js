@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Define API_URL globally for consistency
     // IMPORTANT: Change this to your Render URL when deployed
-    const API_URL = 'http://localhost:3000'; // Assuming your backend routes are /signup, /login directly at root
+    const API_URL = 'https://helloworld-yu4p.onrender.com';// Assuming your backend routes are /signup, /login directly at root
 
     if (!signupForm || !popupOverlay || !continueBtn || !balloonContainer) {
         console.error('Some essential HTML elements are missing!');
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    continueBtn.onclick = function() {
+    continueBtn.onclick = function () {
         stopBalloons();
         // Redirect to your main game page or dashboard after successful signup
         // If index.html is your login page, you might want to redirect to a game page here.
@@ -129,16 +129,16 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Error clear on input - Good practice, keep these
-    document.getElementById('signup-username').addEventListener('input', function() {
+    document.getElementById('signup-username').addEventListener('input', function () {
         document.getElementById('username-error').textContent = '';
     });
-    document.getElementById('signup-email').addEventListener('input', function() {
+    document.getElementById('signup-email').addEventListener('input', function () {
         document.getElementById('email-error').textContent = '';
     });
-    document.getElementById('signup-password').addEventListener('input', function() {
+    document.getElementById('signup-password').addEventListener('input', function () {
         document.getElementById('password-error').textContent = '';
     });
-    document.getElementById('signup-name').addEventListener('input', function() {
+    document.getElementById('signup-name').addEventListener('input', function () {
         document.getElementById('name-error').textContent = '';
     });
 });
