@@ -4,8 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const continueBtn = document.getElementById('continue-button');
     const balloonContainer = document.getElementById('balloon-container');
 
+    // Define API_URL globally for consistency
+    // IMPORTANT: Change this to your Render URL when deployed
+    const API_URL = 'http://localhost:3000'; // Assuming your backend routes are /signup, /login directly at root
+
     if (!signupForm || !popupOverlay || !continueBtn || !balloonContainer) {
-        console.error('Some elements are missing in HTML!');
+        console.error('Some essential HTML elements are missing!');
         return;
     }
 
@@ -13,11 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startBalloons() {
         balloonInterval = setInterval(() => {
-            const colors = ['red', 'pink', 'green', 'yellow', 'golden'];
+            const colors = ['red', 'pink', 'green', 'yellow', 'golden']; // Use actual balloon image names
             const color = colors[Math.floor(Math.random() * colors.length)];
             const balloon = document.createElement('img');
-            balloon.src = `src/${color}.png`;
-            balloon.style.left = Math.random() * 75 + '%';
+            balloon.src = `src/${color}.png`; // Ensure these paths are correct
+            balloon.className = 'balloon-animation'; // Add a class for CSS animations
+            balloon.style.left = Math.random() * 75 + '%'; // Adjust as needed
             balloonContainer.appendChild(balloon);
             balloon.addEventListener('animationend', () => balloon.remove());
         }, 250);
@@ -25,10 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function stopBalloons() {
         clearInterval(balloonInterval);
-        balloonContainer.innerHTML = '';
+        balloonContainer.innerHTML = ''; // Clear all balloons
     }
 
-    signupForm.addEventListener('submit', function (e) {
+    signupForm.addEventListener('submit', async function (e) { // Added async keyword
         e.preventDefault();
 
         // Error divs
@@ -50,57 +55,80 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let hasError = false;
 
-        // Basic email validation
+        // Client-side validations
+        if (name === '') {
+            nameError.textContent = 'Name is required.';
+            hasError = true;
+        }
+        if (username === '') { // Adding username validation too
+            usernameError.textContent = 'Username is required.';
+            hasError = true;
+        }
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email)) {
             emailError.textContent = 'Please enter a valid email address.';
             hasError = true;
         }
-
-        // Password length check
         if (password.length < 6) {
             passwordError.textContent = 'Password must be at least 6 characters.';
             hasError = true;
         }
 
-        // --- Remove localStorage user check (user.json logic) ---
-        // Username/email exists check ab backend karega
+        if (hasError) return; // If any client-side error, stop here
 
-        if (hasError) return; // Agar koi error hai to popup nahi dikhana
+        try {
+            const response = await fetch(`${API_URL}/signup`, { // Use template literal for URL
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, name, email, password })
+            });
 
-        // Signup data backend ko bhejein
-        fetch('http://localhost:3000/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, name, email, password })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.message === 'Signup successful') {
-                signupForm.reset();
+            const data = await response.json();
+
+            if (response.ok) { // Check for successful HTTP status (200-299)
+                // Assuming backend sends token and username on success
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', data.username); // Ensure backend sends username in response
+
+                signupForm.reset(); // Clear form fields
                 setTimeout(() => {
-                    popupOverlay.style.display = 'flex'; // Yahi par popup dikhana hai
-                    startBalloons();
-                }, 500);
+                    popupOverlay.style.display = 'flex'; // Show popup
+                    startBalloons(); // Start balloons
+                }, 500); // Small delay for visual effect
             } else {
-                // Agar koi aur message aaye to popup mat dikhana
-                // Error message show kar sakte hain
-                if (data.message && data.message.includes('exists')) {
-                    emailError.textContent = data.message;
+                // Backend sent an error response (e.g., 400, 409)
+                if (data.message) {
+                    if (data.message.includes('Username already taken')) {
+                        usernameError.textContent = data.message;
+                    } else if (data.message.includes('Email already exists')) {
+                        emailError.textContent = data.message;
+                    } else if (data.message.includes('All fields required')) {
+                        // This case should ideally be caught by client-side validation,
+                        // but good to have as a fallback.
+                        alert(data.message);
+                    } else {
+                        // Generic error message from backend
+                        alert('Signup failed: ' + data.message);
+                    }
+                } else {
+                    alert('An unknown error occurred during signup.');
                 }
             }
-        })
-        .catch(err => {
-            alert('Server error: ' + err.message);
-        });
+        } catch (err) {
+            console.error('Network or server error during signup:', err);
+            alert('Could not connect to the server. Please try again later.');
+        }
     });
 
     continueBtn.onclick = function() {
         stopBalloons();
+        // Redirect to your main game page or dashboard after successful signup
+        // If index.html is your login page, you might want to redirect to a game page here.
+        // For now, keeping it as index.html, assuming it handles logged-in state.
         window.location.href = 'index.html';
     };
 
-    // Error clear on input
+    // Error clear on input - Good practice, keep these
     document.getElementById('signup-username').addEventListener('input', function() {
         document.getElementById('username-error').textContent = '';
     });
